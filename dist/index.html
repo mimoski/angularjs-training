@@ -11,18 +11,47 @@
     <body ng-app="app">
         <div ng-controller="HttpController">
             <h1>Http Controller</h1>
-            <form name="MainForm">
-                <input type="text" name="Name" ng-model="name" placeholder="Search user" />
-                <button type="submit" value="Search" ng-click="search()">Search</button>
-            </form>
-            <div>Login: {{person.login}}</div>
-            <div>ID: {{person.id}}</div>
             <div>
-                <img ng-src="{{person.avatarUrl}}" alt="person"/>
+                <form name="MainForm">
+                    <input type="text" name="Name" ng-model="name" placeholder="Search user" />
+                    <button type="submit" value="Search" ng-click="search()">Search</button>
+                </form>
             </div>
-            <div style="color: #ff0000">
+            <div ng-show="error" style="color: #ff0000">
                 {{error}}
             </div>
+            <div id="Info" ng-show="person">
+                <div>Login: {{person.login}}</div>
+                <div>ID: {{person.id}}</div>
+                <div>
+                    <img ng-src="{{person.avatarUrl}}" alt="person"/>
+                </div>
+                
+                <div>
+                    <select ng-model="sortOrder">
+                        <option value="+name">Name</option>
+                        <option value="-stargazers_count">Stars</option>
+                        <option value="+language">Language</option>
+                    </select>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Stars</th>
+                                <th>Language</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="repo in person.repos | orderBy:sortOrder">
+                                <td>{{repo.name}}</td>
+                                <td>{{repo.stargazers_count | number}}</td>
+                                <td>{{repo.language}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
         </div>
     </body>
 </html>

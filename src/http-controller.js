@@ -22,8 +22,17 @@
                     $scope.person = {
                         login: response.data.login,
                         id: response.data.id,
-                        avatarUrl: $sce.trustAsResourceUrl(response.data.avatar_url)
-                    }
+                        avatarUrl: $sce.trustAsResourceUrl(response.data.avatar_url)                        
+                    };
+                    $scope.sortOrder = "-stargazers_count";
+                    $http.get(response.data.repos_url).then(
+                        function(response){
+                            $scope.person.repos = response.data;
+                        },
+                        function(reason){
+                            $scope.error = reason;
+                        }
+                    )
                 },
                 function(reason){
                     $scope.error = reason;
