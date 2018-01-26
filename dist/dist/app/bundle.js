@@ -80,7 +80,7 @@ module.exports = __webpack_require__(2);
 
     angular
         .module('app', [
-            
+            "ngSanitize"
         ]);
 
 }());
@@ -94,17 +94,33 @@ module.exports = __webpack_require__(2);
     
     angular
         .module('app')
-        .controller('MainController', MainController);
+        .controller('HttpController', ["$scope", "$http", "$sce", HttpController]);
 
     /** @ngInject */
-    function MainController($scope){
-        var vm = this;       
-        init();
+    function HttpController($scope, $http, $sce){
+      
+        $scope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(src);
+        };
 
-        function init(){
-            $scope.modelValue = "AAA";    
+        $scope.search = function(){
+            search($scope.name);
         }
 
+        var search = function(text){
+            $http.get("https://api.github.com/users/" + text).then(
+                function(response){
+                    $scope.person = {
+                        login: response.data.login,
+                        id: response.data.id,
+                        avatarUrl: $sce.trustAsResourceUrl(response.data.avatar_url)
+                    }
+                },
+                function(reason){
+                    $scope.error = reason;
+                }
+            );
+        }
     }
 
 }());
