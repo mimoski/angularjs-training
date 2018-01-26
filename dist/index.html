@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Test app</title>
+        <script src="./dist/angular/angular.js"></script>     
+        <script src="./dist/app/bundle.js"></script>     
+    </head>
+    <body ng-app="app">
+        <div ng-controller="HttpController">
+            <h1>Http Controller</h1>
+            <form name="MainForm">
+                <input type="text" name="Name" ng-model="name" placeholder="Search user" />
+                <button type="submit" value="Search" ng-click="search()">Search</button>
+            </form>
+            <div>Login: {{person.login}}</div>
+            <div>ID: {{person.id}}</div>
+            <div>
+                <img ng-src="{{person.avatarUrl}}" alt="person"/>
+            </div>
+            <div style="color: #ff0000">
+                {{error}}
+            </div>
+        </div>
+    </body>
+</html>
