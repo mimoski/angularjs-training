@@ -1,15 +1,16 @@
-
-<div id="Info" ng-show="person">
-    <div>Login: {{person.login}}</div>
-    <div>ID: {{person.id}}</div>
-    <div>
-        <img ng-src="{{person.avatarUrl}}" alt="person"/>
+<div>
+    <div ng-show="error">
+        {{error}}
     </div>
-    
+    <div>Login: {{user.login}}</div>
+    <div>ID: {{user.id}}</div>
+    <div>
+        <img ng-src="{{user.avatarUrl}}" alt="user" />
+    </div>
     <div>
         <select ng-model="sortOrder">
             <option value="+name">Name</option>
-            <option value="-stargazers_count">Stars</option>
+            <option value="-stars">Stars</option>
             <option value="+language">Language</option>
         </select>
         <table>
@@ -21,12 +22,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="repo in person.repos | orderBy:sortOrder">
-                    <td>{{repo.name}}</td>
-                    <td>{{repo.stargazers_count | number}}</td>
+                <tr ng-repeat="repo in repos | orderBy:sortOrder">
+                    <td><a href="#!/repo/{{user.login}}/{{repo.name}}">{{repo.name}}</a></td>
+                    <td>{{repo.stars | number}}</td>
                     <td>{{repo.language}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+<a href="#!/main">Back to search</a>

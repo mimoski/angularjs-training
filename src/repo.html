@@ -1,0 +1,13 @@
+<div ng-show="error">
+    {{error}}
+</div>
+<div>
+    <h1>{{repo.name}}</h1>
+    <ul>
+        <li ng-repeat="contributor in contributors">
+            {{contributor.name}}
+            <img ng-src="{{contributor.avatarUrl}}" alt="image" width="80px" />
+        </li>
+    </ul>
+</div>
+<a href="#!/user/{{username}}">Back to search</a>

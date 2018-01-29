@@ -5,23 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Test app</title>
-        <script src="./dist/angular/angular.js"></script>     
-        <script src="./dist/app/bundle.js"></script>     
+        <script src="./scripts/angular/angular.js"></script>     
+        <script src="./scripts/app/bundle.js"></script>     
     </head>
-    <body ng-app="app">
-        <div ng-controller="HttpController">
-            <h1>Http Controller</h1>
-            <div>
-                {{countdown}}
-                <form name="MainForm">
-                    <input type="text" name="Name" ng-model="name" placeholder="Search user" />
-                    <button type="submit" value="Search" ng-click="search()">Search</button>
-                </form>
-            </div>
-            <div ng-show="error" style="color: #ff0000">
-                {{error}}
-            </div>
-            <div ng-include="'user-details.html'" ng-show="person"></div>                        
-        </div>
-    </body>
+
+    <body ng-app="GithubViewer">
+        <h1>Github Viewer</h1>
+        <div ng-view></div>
+    </body>  
 </html>

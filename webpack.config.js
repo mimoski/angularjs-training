@@ -3,8 +3,8 @@ var glob = require("glob");
 
 module.exports = {
     entry: {
-        "dist/app/bundle": glob.sync("./src/**/*.js"),
-        "dist/angular/angular": ["./node_modules/angular/angular.js", "./node_modules/angular-sanitize/angular-sanitize.js"]
+        "scripts/app/bundle": glob.sync("./src/**/*.js"),
+        "scripts/angular/angular": ["./node_modules/angular/angular.js", "./node_modules/angular-route/angular-route.js", "./node_modules/angular-sanitize/angular-sanitize.js"]
     },
     output:{
         filename: "[name].js",
@@ -12,5 +12,18 @@ module.exports = {
     },
     devServer:{
         contentBase: "./dist"       
+    },
+    module:{
+        rules: [
+            {
+                test: /\.html$/,
+                use:{
+                    loader: "html-loader",
+                    options: {
+                        minimize: true                       
+                    }
+                }
+            }
+        ]
     }
 };

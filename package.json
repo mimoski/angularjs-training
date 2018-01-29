@@ -5,11 +5,13 @@
   "main": "index.js",
   "dependencies": {
     "angular": "^1.6.7",
+    "angular-route": "^1.6.8",
     "angular-sanitize": "^1.6.8",
     "path": "^0.12.7"
   },
   "devDependencies": {
     "glob": "^7.1.2",
+    "html-loader": "^0.5.5",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
   },
