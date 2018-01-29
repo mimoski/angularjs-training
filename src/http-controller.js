@@ -3,10 +3,10 @@
     
     angular
         .module('app')
-        .controller('HttpController', ["$scope", "$http", "$sce", HttpController]);
+        .controller('HttpController', ["$scope", "$http", "$sce", "$interval", HttpController]);
 
     /** @ngInject */
-    function HttpController($scope, $http, $sce){
+    function HttpController($scope, $http, $sce, $interval){
       
         $scope.trustSrc = function(src) {
             return $sce.trustAsResourceUrl(src);
@@ -16,7 +16,18 @@
             search($scope.name);
         }
 
+        $scope.countdown = 5;
+        $interval(function(){
+            $scope.countdown--;
+        }, 1000, $scope.countdown);
+
+        $scope.$watch("countdown", function(newValue, oldValue){
+            if(newValue == 0){
+                search($scope.name);            
+            }
+        })
         var search = function(text){
+            $scope.countdown = 5;
             $http.get("https://api.github.com/users/" + text).then(
                 function(response){
                     $scope.person = {

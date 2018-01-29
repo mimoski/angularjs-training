@@ -12,6 +12,7 @@
         <div ng-controller="HttpController">
             <h1>Http Controller</h1>
             <div>
+                {{countdown}}
                 <form name="MainForm">
                     <input type="text" name="Name" ng-model="name" placeholder="Search user" />
                     <button type="submit" value="Search" ng-click="search()">Search</button>
